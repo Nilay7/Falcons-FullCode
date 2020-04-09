@@ -17,6 +17,7 @@ import EventList from './components/eventlist/eventlist';
 import ContactUs from './components/contactus';
 import Aboutus from './components/aboutus';
 import UpdatePassword from './components/updatepassword/updatepassword';
+import TaskDelegation from "./components/task-delegation/TaskDelegation";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path='/contactus' component={ContactUs} />
           <Route path='/aboutus' component={Aboutus} />
           <Route path='/updatepassword' component={UpdatePassword} />
+          <Route path='/delegation' component={TaskDelegation} />
         </Switch>
       </div>
     </Router>
