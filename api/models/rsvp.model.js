@@ -11,6 +11,12 @@ const RsvpSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'events'
     },
+    first_name: {
+        type: String
+    },
+    last_name: {
+        type: String
+    },
     response: {
         type: Boolean
     },
