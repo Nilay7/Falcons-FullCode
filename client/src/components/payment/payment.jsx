@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import  "./login.css";
 import Header from '../header.js';
 import Footer from '../footer.js';  
 import { Redirect } from 'react-router-dom'
@@ -11,13 +10,16 @@ const style = {
     margin: 15,
   };
 
-export default class Login extends Component {
+export default class Payment extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      email: '',
-      password: ''
+      name: '',
+      amount: '',
+      eventId: '',
+      link: '',
+      userId: '',
     };
   }
   
@@ -38,22 +40,31 @@ export default class Login extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    fetch('/api/user/login', {
+    fetch('/api/pay/makepayment', {
       method: 'POST',
       body: JSON.stringify(this.state),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token')
       }
     })
     .then(res => {
       if (res.status === 200) {
         res.json().then(resp => {
           console.log(resp)
-          localStorage.setItem("token", resp.data);
-          // alert('Logged-in Successfully!')
-          this.props.history.push('/payment');
+          if(resp){
+            localStorage.setItem("link",resp.paypalLink);
+            localStorage.setItem("userId",resp.userId);
+            localStorage.setItem("eventId",resp.eventId);
+            localStorage.setItem("amount",resp.amount);
+            
+            this.props.history.push({
+              pathname: '/paypalprocess'
+            })
+            
+          }
         })
-      } else {
+      } else {  
         res.json().then(resp => {
           alert(JSON.stringify(resp.msg));
         })
@@ -61,7 +72,7 @@ export default class Login extends Component {
     })
     .catch(err => {
       console.error(err);
-      alert('Error logging in please try again');
+      alert('Error');
     });
   }
 
@@ -70,22 +81,17 @@ export default class Login extends Component {
       <div>
           <Header />
           <br />
-          <h1 align="center">Login</h1>
+          <h1 align="center">Contribute Money</h1>
           <MuiThemeProvider>
               <form onSubmit={this.onSubmit}>
-                  <TextField hintText="Enter Email" floatingLabelText="Email"
-                  onChange={(event, newValue) => this.setState({ email: newValue })}/>
+                  <TextField hintText="Enter Name" floatingLabelText="Name"
+                  onChange={(event, newValue) => this.setState({ name: newValue })}/>
                       <br />
-                      <TextField type="password" hintText="Enter Password" floatingLabelText="Password"
-                      onChange={(event, newValue) => this.setState({ password: newValue })}/>
+                      <TextField type="text" hintText="Enter Amount" floatingLabelText="Amount"
+                      onChange={(event, newValue) => this.setState({ amount: newValue })}/>
                           <br />
                           <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.onSubmit(event)}/>
-                          <br />
-                          <a href="/forgotpassword">Forgot Password?</a> 
-                          <br />
-                          <br />
-                          <a href="/register">Not a User? Sign Up!</a>   
-              </form>
+              </form>           
           </MuiThemeProvider>
           <Footer />
       </div>
