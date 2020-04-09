@@ -8,8 +8,8 @@ export default function Footer(props) {
             <Navbar className="center-navbar" fixed="bottom" bg="dark" variant="dark">
                 <Navbar.Brand href="#home">Event</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link href="#home">About us</Nav.Link>
-                    <Nav.Link href="#features">Contact</Nav.Link>
+                    <Nav.Link href="/aboutus">About us</Nav.Link>
+                    <Nav.Link href="/contactus">Contact</Nav.Link>
                 </Nav>
                 
             </Navbar>

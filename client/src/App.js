@@ -9,6 +9,13 @@ import EventInvitation from './components/event-invitation/event-invitation';
 import Payment from './components/payment/payment';
 import PayPalProcess from './components/payment/payment-sandbox-link'
 import PaymentFinish from './components/payment/payment-finish';
+import EditProfile from './components/edit-profile/EditProfile';
+import Forgetpassword from './components/login/forgetpassword';
+import Resetpassword from './components/login/resetpassword';
+
+import EventList from './components/eventlist/eventlist';
+import ContactUs from './components/contactus';
+import Aboutus from './components/aboutus';
 
 function App() {
   return (
@@ -22,6 +29,12 @@ function App() {
           <Route path='/payment' component={Payment} />
           <Route path='/paypalprocess' component={PayPalProcess} />
           <Route path='/paymentsuccess' component={PaymentFinish} />
+          <Route path='/edit-profile' component={EditProfile} />
+          <Route path='/forgetpassword' component={Forgetpassword} />
+          <Route path='/resetpassword' component={Resetpassword} />
+          <Route path='/eventlist' component={EventList} />
+          <Route path='/contactus' component={ContactUs} />
+          <Route path='/aboutus' component={Aboutus} />
         </Switch>
       </div>
     </Router>
