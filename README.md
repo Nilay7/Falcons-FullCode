@@ -27,7 +27,7 @@ https://falcons-backend.herokuapp.com/api/user/login
 
 ##### Feel Free to register yourself!
 
-### Individual Contribution to Backend Development
+### Individual Contribution to Frontend Development
 
 #### Nilay Patel
 
@@ -48,6 +48,28 @@ https://falcons-backend.herokuapp.com/api/user/login
 `client/src/components/updatepassword/updatepassword.jsx`
 
 `/updatepassword`
+
+#### Harshil Patel
+
+* Edit Profile
+`client/src/components/edit-profile/EditProfile.js`
+
+`/edit-profile`
+
+* Event Invitation
+`client/src/components/event-invitation/event-invitation.js`
+
+`/invite`
+
+* RSVP
+`client/src/components/rsvp/Rsvp.js`
+
+`/rsvp`
+
+* Task Delegation
+`client/src/components/task-delegation/TaskDelegation.js`
+
+`/delegation`
 
 ### Steps to run the project
 
