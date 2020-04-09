@@ -58,62 +58,62 @@ class EditProfile extends React.Component {
                     <div className="row justify-content-center">
                         <div className="col-lg-6 col-lg-offset-4">
                             <h3>Edit Profile</h3>
-                            <form className="form-horizontal" role="form">
+                            <form className="form-horizontal">
                                 <div className="form-group">
                                     <label className="col-md-3 control-label">Username:</label>
 
-                                        <input className="form-control" type="text" value={this.state.username}
-                                               onChange={(event) => this.setState({username: event.target.value})}/>
+                                    <input className="form-control" type="text" value={this.state.username}
+                                           onChange={(event) => this.setState({username: event.target.value})}/>
 
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-3 control-label">First name:</label>
 
-                                        <input className="form-control" type="text" value={this.state.firstname}
-                                               onChange={(event) => this.setState({firstname: event.target.value})}/>
+                                    <input className="form-control" type="text" value={this.state.firstname}
+                                           onChange={(event) => this.setState({firstname: event.target.value})}/>
 
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-3 control-label">Last name:</label>
 
-                                        <input className="form-control" type="text" value={this.state.lastname}
-                                               onChange={(event) => this.setState({lastname: event.target.value})}/>
+                                    <input className="form-control" type="text" value={this.state.lastname}
+                                           onChange={(event) => this.setState({lastname: event.target.value})}/>
 
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-3 control-label">Email:</label>
 
-                                        <input className="form-control" type="email" value={this.state.email}
-                                               onChange={(event) => this.setState({email: event.target.value})}/>
+                                    <input className="form-control" type="email" value={this.state.email}
+                                           onChange={(event) => this.setState({email: event.target.value})}/>
 
                                 </div>
                                 <div className="form-group">
                                     <label className="col-lg-3 control-label">Phone:</label>
 
-                                        <input className="form-control" type="text" value={this.state.phonenumber}
-                                               onChange={(event) => this.setState({phonenumber: event.target.value})}/>
+                                    <input className="form-control" type="text" value={this.state.phonenumber}
+                                           onChange={(event) => this.setState({phonenumber: event.target.value})}/>
 
                                 </div>
                                 <div className="form-group">
                                     <label className="col-md-3 control-label">Password:</label>
 
-                                        <input className="form-control" type="password" value={this.state.password}
-                                               onChange={(event) => this.setState({password: event.target.value})}/>
+                                    <input className="form-control" type="password" value={this.state.password}
+                                           onChange={(event) => this.setState({password: event.target.value})}/>
 
                                 </div>
                                 <div className="form-group">
                                     <label className="col-md-3 control-label">Confirm password:</label>
 
-                                        <input className="form-control" type="password"
-                                               value={this.state.confirm_password}
-                                               onChange={(event) => this.setState({confirm_password: event.target.value})}/>
+                                    <input className="form-control" type="password"
+                                           value={this.state.confirm_password}
+                                           onChange={(event) => this.setState({confirm_password: event.target.value})}/>
 
                                 </div>
                                 <div className="form-group">
 
-                                        <input type="button" className="btn btn-primary" value="Update"
-                                               onClick={this.updateProfileHandler}/>
-                                        <input type="reset" className="btn btn-default" value="Cancel"/>
+                                    <input type="button" className="btn btn-primary" value="Update"
+                                           onClick={this.updateProfileHandler}/>
+                                    <input type="reset" className="btn btn-default" value="Cancel"/>
 
                                 </div>
                             </form>

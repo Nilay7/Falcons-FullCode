@@ -10,6 +10,15 @@ router.post('/confirm', [
     check('event_id')
         .exists()
         .withMessage('event id is required'),
+    check('user_id')
+        .exists()
+        .withMessage('user id is required'),
+    check('first_name')
+        .exists()
+        .withMessage('first_name is required'),
+    check('last_name')
+        .exists()
+        .withMessage('last_name is required'),
     check('response')
         .exists()
         .withMessage('response is required'),
@@ -25,5 +34,11 @@ router.post('/update/:rsvpId', [
         .exists()
         .withMessage('response is required'),
 ], auth, controller.updateRsvp);
+
+router.get('/rsvpbyevent/:event_id', [
+    check('event_id')
+        .exists()
+        .withMessage('event id is required'),
+], auth, controller.getRsvpByEvent);
 
 module.exports = router;

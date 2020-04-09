@@ -16,7 +16,7 @@ exports.addDelegation = function (req, res) {
             return res.status(422).json({errors: errors.array()});
         }
 
-        const user_id = req.user;
+        const user_id = req.body.user_id;
         const first_name = req.body.first_name;
         const last_name = req.body.last_name;
         const event_id = req.body.event_id;
@@ -34,15 +34,15 @@ exports.addDelegation = function (req, res) {
         var eventExists = Event.findById(event_id);
 
         if (userExists && eventExists) {
-        newDelegation.save()
-            .then(() => res.json('Delegation added.!'))
-            .catch(err => res.status(400).json('Error: ' + err));
+            newDelegation.save()
+                .then(() => res.json('Delegation added.!'))
+                .catch(err => res.status(400).json('Error: ' + err));
         } else {
             return res.status(500).send('Error: User or Event does not exists.');
         }
     } catch (e) {
         console.log('Error: ', e);
-        return res.status(500).json('Error: '+ e);
+        return res.status(500).json('Error: ' + e);
     }
 };
 

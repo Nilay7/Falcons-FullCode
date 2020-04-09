@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Button, Form, FormControl } from "react-bootstrap";
+import {Button, Form, FormControl} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Header(props) {
@@ -15,10 +15,11 @@ export default function Header(props) {
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/register">Register</Nav.Link>
                 <Nav.Link href="/event">Event</Nav.Link>
+                <Nav.Link href="/delegation">Task Delegation</Nav.Link>
                 <Nav.Link href="/edit-profile">Edit Profile</Nav.Link>
             </Nav>
             <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                <FormControl type="text" placeholder="Search" className="mr-sm-2"/>
                 <Button variant="outline-info">Search</Button>
             </Form>
         </Navbar>
