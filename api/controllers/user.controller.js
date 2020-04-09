@@ -179,9 +179,9 @@ exports.updatePassword = async function (req, res) {
     userdata.password = hashPassword;
     userdata.save(function (err, data) {
         if (err) {
-            return res.status(500).send({Error: err});
+            return res.status(500).send({message: err});
         } else {
-            return res.send('Your password has been updated successfully!');
+            return res.send({message: 'Your password has been updated successfully!'});
         }
     });
 };

@@ -16,6 +16,7 @@ import Resetpassword from './components/login/resetpassword';
 import EventList from './components/eventlist/eventlist';
 import ContactUs from './components/contactus';
 import Aboutus from './components/aboutus';
+import UpdatePassword from './components/updatepassword/updatepassword';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path='/eventlist' component={EventList} />
           <Route path='/contactus' component={ContactUs} />
           <Route path='/aboutus' component={Aboutus} />
+          <Route path='/updatepassword' component={UpdatePassword} />
         </Switch>
       </div>
     </Router>
