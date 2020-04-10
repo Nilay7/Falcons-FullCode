@@ -35,6 +35,12 @@ const EventSchema = new mongoose.Schema({
     address: {
         type: String
     },
+    address_latitude: {
+        type: Schema.Types.Decimal128
+    },
+    address_longitude: {
+        type: Schema.Types.Decimal128
+    },
     start_date: {
         type: Date
     },
