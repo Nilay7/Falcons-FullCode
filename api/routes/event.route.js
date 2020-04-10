@@ -2,6 +2,7 @@ const express = require('express');
 const {check} = require('express-validator');
 const eventController = require('../controllers/event.controller');
 const multer = require('multer');
+const auth = require('../middlewares/auth');
 
 var storage = multer.diskStorage({
     destination: './uploads',
@@ -32,6 +33,7 @@ router.get('/:event_id', eventController.fetchEvent);
  * Route to create new events
  */
 router.post('/addevent',
+    auth,
     upload.single('image'),
     eventController.createNewEvent
 );

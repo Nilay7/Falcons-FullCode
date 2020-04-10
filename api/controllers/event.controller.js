@@ -3,10 +3,19 @@ const Event = require('../models/event.model');
 const multer = require('multer');
 var upload = multer({ dest: 'uploads/' });
 const path = require('path');
+const config = require('config');
+const NodeGeocoder = require('node-geocoder');
+
+const options = {
+    provider: 'google',
+    apiKey: config.get('google_maps_api_key')
+};
+
+const geocoder = NodeGeocoder(options);
 
 exports.fetchEvent = async (request, response) => {
     try {
-        const eventFromDb = await Event.findById(request.params.event_id );
+        const eventFromDb = await Event.findById(request.params.event_id ).populate('user_id');
         if (eventFromDb == null){
             response.status(404).send('Event not found');
         }
@@ -39,13 +48,17 @@ exports.createNewEvent = async (request, response) => {
         var param = '';
         var error = false;
         
-        if(!request.user._id){
+        if(!request.user){
             error = true;
             param = param + "user_id";
         }
         if(!request.body.name){
             error = true;
             param = param + ", name";
+        }
+        if(!request.body.address){
+            error = true;
+            param = param + ", address";
         }
         if(!request.body.start_date){
             error = true;
@@ -65,19 +78,27 @@ exports.createNewEvent = async (request, response) => {
         }
 
         if(error){
+            console.log("error: " + param);
             return response.status(400).send({
                 "status": "Error",
                 "message": "Missing params "+param
             })
         }
 
+        const res = await geocoder
+            .geocode(request.body.address);
+        const latitude = res[0].latitude;
+        const longitude = res[0].longitude;
+
         const newEvent = new Event({
-            user_id: request.user._id,            
+            user_id: request.user,
             name: request.body.name,
             description: request.body.description,
             event_picture: request.file.filename,
             type: request.body.type,
             address: request.body.address,
+            address_latitude: latitude,
+            address_longitude: longitude,
             start_date: request.body.start_date,
             end_date: request.body.end_date
         });
@@ -116,6 +137,10 @@ exports.updateEvent = async (request, response) => {
         }
         if(request.body.address){
             eventFromDB.address = request.body.address;
+            const res = await geocoder
+                .geocode(request.body.address);
+            eventFromDB.address_latitude = res[0].latitude;
+            eventFromDB.address_longitude = res[0].longitude;
         }
         if(request.body.start_date){
             eventFromDB.start_date = request.body.start_date;
