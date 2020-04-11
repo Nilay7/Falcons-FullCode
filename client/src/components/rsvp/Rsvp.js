@@ -4,6 +4,8 @@ import Modal from "react-bootstrap/Modal";
 import '../rsvp/rsvp.css';
 import {Dropdown, DropdownButton} from "react-bootstrap";
 import axios from "axios";
+import Header from "../header";
+import Footer from "../footer";
 
 const MyVerticallyCenteredModal = (props) => {
 
@@ -62,11 +64,13 @@ class RSVP extends React.Component {
             user_id: "5e3eeec1a839dc1b20bcd825",
             event_id: "5e3c13f99206141034f95430",
             response: true,
+            first_name: 'Harshil',
+            last_name: 'Patel',
             no_of_guests: this.state.guest
         };
 
         axios.post('http://localhost:3000/api/rsvp/confirm/', rsvp)
-            .then(res => console.log(res.data));
+            .then(res => alert(res.data.message));
 
         this.setState({
             modalShow: false,
@@ -78,6 +82,8 @@ class RSVP extends React.Component {
     render() {
         return (
             <div>
+                <Header/>
+                <br/>
                 < div className="container">
                     <div className="vertical-center">
                         <Button variant="primary" onClick={() => this.setState({modalShow: true})}>
@@ -90,6 +96,7 @@ class RSVP extends React.Component {
                                                rsvpClicked={this.saveRsvp} guestsUpdated={this.guestsUpdated}
                                                guests={this.state.guest}/>
                 </div>
+                <Footer/>
             </div>
         )
     };

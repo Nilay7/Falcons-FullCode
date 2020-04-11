@@ -33,7 +33,7 @@ class EditProfile extends React.Component {
 
         axios.put('http://localhost:3000/api/user/update/', user)
             .then(response => {
-                console.log(response);
+                alert(response);
             });
     };
 

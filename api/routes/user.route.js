@@ -49,7 +49,6 @@ router.put('/update', [
         .isEmpty()
 ], userController.updateProfile);
 
-
 router.post('/login', [
     check('email', 'Please enter email')
         .not()
