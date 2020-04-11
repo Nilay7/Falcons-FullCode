@@ -6,6 +6,9 @@ import Login from './components/login/login';
 import Register from './components/register/register';
 import RSVP from "./components/rsvp/Rsvp";
 import EventInvitation from './components/event-invitation/event-invitation';
+import Payment from './components/payment/payment';
+import PayPalProcess from './components/payment/payment-sandbox-link'
+import PaymentFinish from './components/payment/payment-finish';
 import EditProfile from './components/edit-profile/EditProfile';
 import Forgetpassword from './components/login/forgetpassword';
 import Resetpassword from './components/login/resetpassword';
@@ -23,6 +26,9 @@ function App() {
           <Route path='/register' component={Register} />
           <Route path='/rsvp' component={RSVP} />
           <Route path='/invite' component={EventInvitation} />
+          <Route path='/payment' component={Payment} />
+          <Route path='/paypalprocess' component={PayPalProcess} />
+          <Route path='/paymentsuccess' component={PaymentFinish} />
           <Route path='/edit-profile' component={EditProfile} />
           <Route path='/forgetpassword' component={Forgetpassword} />
           <Route path='/resetpassword' component={Resetpassword} />

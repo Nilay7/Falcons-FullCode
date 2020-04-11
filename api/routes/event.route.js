@@ -1,16 +1,16 @@
 const express = require('express');
-const { check } = require('express-validator');
+const {check} = require('express-validator');
 const eventController = require('../controllers/event.controller');
 const multer = require('multer');
 
-var storage = multer.diskStorage({ 
-    destination: './uploads', 
+var storage = multer.diskStorage({
+    destination: './uploads',
     filename: function (req, file, cb) {
         cb(null, file.originalname)
-    } 
+    }
 });
 
-var upload = multer({ storage: storage });
+var upload = multer({storage: storage});
 /**
  * Express router to mount event related functions on.
  * @type {object}

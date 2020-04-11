@@ -11,9 +11,9 @@ paypal.configure({
 exports.pay = function(req, res){
 
     const name = req.body.name;
-    const price = req.body.price;
+    const amount = req.body.amount;
     const userId = req.user;
-    const eventId = req.body.event_id;
+    const eventId = "5e728f21cb5eb79ed0d277b5";
 
     const create_payment_json = {
         "intent": "sale",
@@ -21,22 +21,22 @@ exports.pay = function(req, res){
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:3000/api/pay/success?userId="+userId+"&eventId="+eventId,
-            "cancel_url": "http://localhost:3000/api/pay/cancel"
+            "return_url": "http://localhost:4000/paymentsuccess",
+            "cancel_url": "http://localhost:4000/paymentfailure"
         },
         "transactions": [{
             "item_list": {
                 "items": [{
                     "name": name,
                     "sku": "001",
-                    "price": price,
+                    "price": amount,
                     "currency": "CAD",
                     "quantity": 1
                 }]
             },
             "amount": {
                 "currency": "CAD",
-                "total": price
+                "total": amount
             },
             "description": "Contributing money"
         }]
@@ -44,12 +44,19 @@ exports.pay = function(req, res){
     
     paypal.payment.create(create_payment_json, function (error, payment) {
         if (error) {
+            console.log(error)
             throw error;
         } else {
-            console.log(payment.transactions[0].amount);
+            
             for(let i = 0;i < payment.links.length;i++){
               if(payment.links[i].rel === 'approval_url'){
-                return res.send(payment.links[i].href);
+                console.log('paypal backend',payment.links[i].href);
+                return res.send({
+                    'paypalLink':payment.links[i].href,
+                    'userId': userId,
+                    'eventId': eventId,
+                    'amount': amount
+                });
               }
             }
         }
@@ -60,8 +67,9 @@ exports.success = function(req, res){
     console.log('req/query',req.query)
   const payerId = req.query.PayerID;
   const paymentId = req.query.paymentId;
-  const userId = req.query.userId;
-  const eventId = req.query.eventId;
+  const userId = req.body.userId;
+  const eventId = req.body.eventId;
+  const amount = req.body.amount;
 
   console.log(`userId: ${userId} -- eventId: ${eventId}`)
 
@@ -70,7 +78,7 @@ exports.success = function(req, res){
     "transactions": [{
         "amount": {
             "currency": "CAD",
-            "total": "10.00"
+            "total": amount
         }
     }]
   };
@@ -91,13 +99,19 @@ exports.success = function(req, res){
                 return res.status(400).send('Error Encountered while processing the payment!'+err);
             }
             console.log(JSON.stringify(payment));
-            res.send('Success');
+            res.send({
+                'status': 'success',
+                'message': 'Transaction successfully completed!'
+            });
         });
     }
 });
 };
 
 exports.cancel = function(req, res){
-    res.send('Payment Cancelled!');
+    res.send({
+        'status': 'failure',
+        'message': 'Something went wrong!'
+    });
 };
 
