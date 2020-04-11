@@ -3,7 +3,7 @@ import './event.css';
 import Header from '../header';
 import Footer from '../footer';
 import MapContainer from "./MapContainer";
-import {Card, Col, Container, Row, Form} from "react-bootstrap";
+import {Card, Col, Container, Row, Form, Button} from "react-bootstrap";
 
 
 const NewComment = () => {
@@ -88,6 +88,15 @@ const EventRightSideBar = (props) => {
                     <br/>
                     &nbsp;&nbsp;<span className="fas fa-calendar-check fa-2x" />
                     &nbsp;&nbsp;&nbsp;{props.end_date.toString()}
+                    <br/><br/>
+                    <Button
+                        variant="success"
+                        type="submit"
+                        href="/payment"
+                        block
+                    >
+                        Buy Ticket
+                    </Button>
                     <br/>
                 </Card.Text>
             </Card.Body>
