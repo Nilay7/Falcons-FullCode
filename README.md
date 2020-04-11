@@ -75,7 +75,7 @@ https://falcons-backend.herokuapp.com/api/user/login
 ### Contribution
 
 | Feature       | Frontend (React) | Backend (Node) |
-| ------------- |:-------------:| -----:|
+| :------------- | -------------:| -----:|
 | **Rakshit** |
 | Event      | src/components/event/event.css src/components/event/event-create.js src/components/event/event-view.js src/components/event/MapContainer.js | api/controllers/event.controller.js api/models/event.model.js api/routes/event.route.js |
 | Google Maps API      | src/components/event/MapContainer.js | api/controllers/event.controller.js |
