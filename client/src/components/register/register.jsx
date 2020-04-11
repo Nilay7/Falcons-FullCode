@@ -11,10 +11,12 @@ export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_name: '',
-      last_name: '',
+      username: '',
+      firstname: '',
+      lastname: '',
       email: '',
-      password: ''
+      password: '',
+      phonenumber:''
     }
   }
 
@@ -35,7 +37,7 @@ export default class Register extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    fetch('/api/user/login', {
+    fetch("http://localhost:4000/api/user/register", {
       method: 'POST',
       body: JSON.stringify(this.state),
       headers: {
@@ -45,7 +47,7 @@ export default class Register extends Component {
     .then(res => {
       if (res.status === 200) {
         res.json().then(resp => {
-          console.log(resp)
+         
           localStorage.setItem("token", resp.data);
           alert('Registered Successfully!')
         })
@@ -71,6 +73,15 @@ export default class Register extends Component {
         <form onSubmit={this.onSubmit}>
         <h1>Registration</h1>
 
+        <TextField
+              hintText="Enter UserName"
+              type="name"
+              name="username"
+              floatingLabelText="User Name"
+              value={this.state.username}
+              onChange={this.handleInputChange}
+              required
+            /><br/>
         <TextField
               hintText="Enter FirstName"
               type="name"
@@ -104,6 +115,15 @@ export default class Register extends Component {
               name="password"
               floatingLabelText="Password"
               value={this.state.password}
+              onChange={this.handleInputChange}
+              required
+            /><br/>
+            <TextField
+              hintText="Enter Phonenumber"
+              type="phonenumber"
+              name="phonenumber"
+              floatingLabelText="PhoneNumber"
+              value={this.state.phonenumber}
               onChange={this.handleInputChange}
               required
             /><br/>

@@ -15,7 +15,7 @@ router.post('/register', [
         .not()
         .isEmpty(),
     check('phonenumber', 'Please enter phonenumber')
-        .not()
+       .not()
         .isEmpty(),
     check('firstname', 'Please enter firstname')
         .not()
@@ -35,12 +35,12 @@ router.put('/update', [
         .isEmail(),
     check('password', 'Password must be at least six charactres long')
         .isLength({min: 6}),
-    check('username', 'Please enter username')
-        .not()
-        .isEmpty(),
-    check('phonenumber', 'Please enter phonenumber')
-        .not()
-        .isEmpty(),
+   //check('username', 'Please enter username')
+    //    .not()
+    //    .isEmpty(),
+    //check('phonenumber', 'Please enter phonenumber')
+      //  .not()
+        //.isEmpty(),
     check('firstname', 'Please enter firstname')
         .not()
         .isEmpty(),

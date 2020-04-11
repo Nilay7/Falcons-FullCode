@@ -11,6 +11,7 @@ sgMail.setApiKey(config.get('SENDGRID_API_KEY'));
 exports.register = async function (req, res) {
 
     const errors = validationResult(req);
+    console.log(req)
     if (!errors.isEmpty()) {
         return res.status(422).json({errors: errors.array()});
     }
@@ -65,7 +66,7 @@ exports.updateProfile = async function (req, res) {
     //create a new user
     const user = new User({
         _id: req.body._id,
-        username: req.body.username,
+      username: req.body.username,
         email: req.body.email,
         password: hashPassword,
         firstname: req.body.firstname,
