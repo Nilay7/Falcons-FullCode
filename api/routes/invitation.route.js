@@ -9,10 +9,6 @@ router.post('/invite',
         check('event_id')
             .exists()
             .withMessage('event id is required'),
-        check("users.*.user_id")
-            .not()
-            .isEmpty()
-            .withMessage('user id is required'),
         check("users.*.email")
             .not()
             .isEmpty()
