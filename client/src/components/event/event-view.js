@@ -98,6 +98,8 @@ const EventRightSideBar = (props) => {
                         Buy Ticket
                     </Button>
                     <br/>
+                    <RSVP event_id={props.event_id} address={props.address} start_date={props.start_date}
+                          end_date={props.end_date} name={props.name}/>
                 </Card.Text>
             </Card.Body>
             <MapContainer lat={props.address_latitude} lng={props.address_logitide}/>
@@ -207,6 +209,7 @@ export default function Event(props) {
                                 address_logitide={address_logitide}
                                 start_date={start_date}
                                 end_date={end_date}
+                                event_id={event_id}
                             />
                         </Col>
                     </Row>

@@ -83,7 +83,7 @@ class EditProfile extends React.Component {
                                 <div className="form-group">
                                     <label className="col-lg-3 control-label">Email:</label>
 
-                                    <input className="form-control" type="email" value={this.state.email}
+                                    <input className="form-control" type="text" value={this.state.email}
                                            onChange={(event) => this.setState({email: event.target.value})}/>
 
                                 </div>
