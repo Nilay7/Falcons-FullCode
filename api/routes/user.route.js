@@ -66,7 +66,7 @@ router.post('/forgotpassword', [
         .isEmail()
 ], userController.forgotPassword);
 
-router.post('/resetpassword/:token', userController.resetPassword);
+router.get('/resetpassword/:token', userController.resetPassword);
 
 router.post('/updatepassword', auth, userController.updatePassword);
 

@@ -122,7 +122,7 @@ exports.forgotPassword = async function (req, res) {
     if (checkemail) {
 
         const token = jwt.sign({_id: checkemail._id}, jwtsecret)
-        var link = 'localhost:3000/api/user/resetpassword/' + token;
+        var link = 'localhost:4000/resetpassword/' + token;
         const msg = {
             to: checkemail.email,
             from: config.get('myEmail'),
