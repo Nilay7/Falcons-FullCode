@@ -11,28 +11,28 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 class Forgetpassword extends React.Component {
   state = {
-    emailAddress: '',
+    email: '',
     loading: false,
   }
 
   handleChange = (event) => {
     const { value } = event.target;
     this.setState({
-      emailAddress: value,
+      email: value,
     });
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const { emailAddress } = this.state;
+    const { email } = this.state;
 
     this.setState({
       loading: true,
     });
 
-    axios.post("http://localhost:3000/user/forgotpassword", {
-      email: emailAddress,
+    axios.post("http://localhost:4000/api/user/forgotpassword", {
+      email: email,
     }).then(() => {
       toast.success("Check your email address for the recovery link")
     })
@@ -47,7 +47,7 @@ class Forgetpassword extends React.Component {
   }
 
   render() {
-    const { emailAddress, loading } = this.state;
+    const { email, loading } = this.state;
 
     return (
       <div className="App">
@@ -57,7 +57,7 @@ class Forgetpassword extends React.Component {
           <form onSubmit={this.handleSubmit} className="password-reset" action="">
             <h3>Forgot your password?</h3><br/>
             <label htmlFor="email-input">Enter Email address</label>
-            <input type="email" onChange={this.handleChange} value={emailAddress} className="email-input" placeholder="name@example.com" id="email-input" name="email" /><br/>
+            <input type="email" onChange={this.handleChange} value={email} className="email-input" placeholder="name@example.com" id="email-input" name="email" /><br/>
             <button type="submit">Email me a recovery link</button>
             { loading ? <Spinner name='line-scale-pulse-out' /> : null }
           </form>
