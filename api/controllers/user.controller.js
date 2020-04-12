@@ -96,7 +96,7 @@ exports.login = async function (req, res) {
 
     //password is correct
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if(!validPass) return res.status(400).send({msg: 'Invalid password'});
+    if (!validPass) return res.status(400).send({msg: 'Invalid password'});
 
     //create and assign a token 
     const token = jwt.sign({_id: user._id}, jwtsecret);
@@ -184,4 +184,20 @@ exports.updatePassword = async function (req, res) {
             return res.send({message: 'Your password has been updated successfully!'});
         }
     });
+};
+
+exports.getUser = async function (req, res) {
+    const token = req.params.token;
+
+    const decoded = jwt.verify(token, config.get('jwtsecret'));
+
+    const userId = decoded._id;
+
+    const userdata = await User.findOne({_id: userId});
+
+    if (userdata) {
+        return res.json(userdata);
+    } else {
+        return res.status(500).send({Error: err});
+    }
 };
