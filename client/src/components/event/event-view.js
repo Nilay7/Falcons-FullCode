@@ -6,7 +6,6 @@ import MapContainer from "./MapContainer";
 import {Card, Col, Container, Row, Form, Button} from "react-bootstrap";
 import RSVP from "../rsvp/Rsvp";
 
-
 const NewComment = () => {
     return(
         <div className="AddTopMargin">
@@ -96,7 +95,7 @@ const EventRightSideBar = (props) => {
                         href="/payment"
                         block
                     >
-                        Buy Ticket
+                    Make a contribution
                     </Button>
                     <br/>
                     <RSVP event_id={props.event_id} address={props.address} start_date={props.start_date}

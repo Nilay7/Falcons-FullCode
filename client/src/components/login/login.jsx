@@ -50,8 +50,7 @@ export default class Login extends Component {
         res.json().then(resp => {
           console.log(resp)
           localStorage.setItem("token", resp.data);
-          // alert('Logged-in Successfully!')
-          this.props.history.push('/payment');
+          this.props.history.push('/event/create');
         })
       } else {
         res.json().then(resp => {

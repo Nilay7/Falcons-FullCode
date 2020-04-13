@@ -77,10 +77,10 @@ export default class UpdatePassword extends Component {
           <h1 align="center">Update Password</h1>
           <MuiThemeProvider>
               <form onSubmit={this.onSubmit}>
-                  <TextField hintText="Enter New Password" floatingLabelText="New Password"
+                  <TextField type="password" hintText="Enter New Password" floatingLabelText="New Password"
                   onChange={(event, newValue) => this.setState({ newPassword: newValue })}/>
                       <br />
-                      <TextField hintText="Confirm Password" floatingLabelText="Confirm Password"
+                      <TextField type="password" hintText="Confirm Password" floatingLabelText="Confirm Password"
                       onChange={(event, newValue) => this.setState({ confirmPassword: newValue })}/>
                           <br />
                           <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.onSubmit(event)}/>
