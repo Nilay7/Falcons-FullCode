@@ -4,6 +4,7 @@ import Header from '../header';
 import Footer from '../footer';
 import MapContainer from "./MapContainer";
 import {Card, Col, Container, Row, Form, Button} from "react-bootstrap";
+import RSVP from "../rsvp/Rsvp";
 
 
 const NewComment = () => {
