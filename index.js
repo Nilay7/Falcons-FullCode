@@ -3,7 +3,7 @@ const app = express();
 const config = require('config');
 var cors = require('cors');
 const connectDB = require('./config/connectDB');
-const port = process.env.PORT || 3000;
+const port = config.get('port');
 
 const paypal = require('paypal-rest-sdk');
 
