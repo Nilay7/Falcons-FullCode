@@ -59,21 +59,23 @@ exports.updateProfile = async function (req, res) {
     });
 
     //Hash passwords
-    const salt = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(req.body.password, salt);
+    // const salt = await bcrypt.genSalt(10);
+    // const hashPassword = await bcrypt.hash(req.body.password, salt);
 
     //create a new user
     const user = new User({
         _id: req.body._id,
         username: req.body.username,
         email: req.body.email,
-        password: hashPassword,
+        password: req.body.password,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         phonenumber: req.body.phonenumber,
     });
+
     try {
-        const savedUser = await User.findOneAndUpdate(user);
+        const savedUser = await User.findByIdAndUpdate(req.body._id, user);
+
         return res.send({
             "status": "success",
             "data": savedUser
