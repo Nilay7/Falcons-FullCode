@@ -27,7 +27,7 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path='/login' component={Login} />
+          <Route exact path='/' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/rsvp' component={RSVP} />
           <Route path='/invite' component={EventInvitation} />

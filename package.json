@@ -4,12 +4,13 @@
   "description": "Event Management Application - Full code",
   "main": "index.js",
   "scripts": {
+    "start": "npm run dev",
     "server": "nodemon index.js",
     "client": "cd client && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "client/react-scripts build",
-    "test": "client/react-scripts test",
-    "eject": "client/react-scripts eject"
+    "client-install": "cd client && npm install",
+    "preinstall": "npm i concurrently",
+    "postinstall": "npm run client-install",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "directories": {
     "lib": "lib"
@@ -36,6 +37,9 @@
     "paypal-rest-sdk": "^1.8.1",
     "react-spinkit": "^3.0.0",
     "react-toastify": "^5.5.0"
+  },
+  "engines": {
+    "node": "12.x"
   },
   "bugs": {
     "url": "https://github.com/2020-Winter-ITE-5430-A/project-client-team-the-falcons/issues"

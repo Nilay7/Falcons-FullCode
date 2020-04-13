@@ -50,8 +50,7 @@ export default class Login extends Component {
         res.json().then(resp => {
           console.log(resp)
           localStorage.setItem("token", resp.data);
-          // alert('Logged-in Successfully!')
-          this.props.history.push('/payment');
+          this.props.history.push('/event-create');
         })
       } else {
         res.json().then(resp => {
@@ -81,7 +80,7 @@ export default class Login extends Component {
                           <br />
                           <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.onSubmit(event)}/>
                           <br />
-                          <a href="/forgotpassword">Forgot Password?</a> 
+                          <a href="/forgetpassword">Forgot Password?</a> 
                           <br />
                           <br />
                           <a href="/register">Not a User? Sign Up!</a>   

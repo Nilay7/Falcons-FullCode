@@ -27,10 +27,6 @@ class Invitation extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        // const isValid = this.validate();
-
-        // if (isValid) {
-
         const invite = {
             event_id: "5e728f21cb5eb79ed0d277b5",
             "users": [
@@ -40,7 +36,6 @@ class Invitation extends React.Component {
             ]
         };
 
-        // console.log(invite);
         axios.post('http://localhost:3000/api/invitation/invite/', invite)
             .then(res => alert(res.data));
 
@@ -48,8 +43,6 @@ class Invitation extends React.Component {
             email: ''
         });
 
-        // window.location = '/roomHome';
-        // }
     };
 
     render() {

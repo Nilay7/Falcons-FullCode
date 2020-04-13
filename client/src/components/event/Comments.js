@@ -99,11 +99,3 @@ export default function Comments(props) {
         </Row>
     )
 };
-
-const CommentList = (props) => {
-    // const comments_list = props.comments;
-    //
-    // return (
-    //     {comments_view}
-    // );
-};

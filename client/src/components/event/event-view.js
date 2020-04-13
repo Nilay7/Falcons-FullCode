@@ -5,7 +5,7 @@ import Footer from '../footer';
 import MapContainer from "./MapContainer";
 import {Card, Col, Container, Row, Form, Button} from "react-bootstrap";
 import Comments from "./Comments";
-
+import RSVP from "../rsvp/Rsvp";
 
 export default function Event(props) {
     const [admin, setAdmin] = useState("");
@@ -80,6 +80,7 @@ export default function Event(props) {
                                 address_logitide={address_logitide}
                                 start_date={start_date}
                                 end_date={end_date}
+                                event_id={event_id}
                             />
                         </Col>
                     </Row>
@@ -120,11 +121,6 @@ const EventRightSideBar = (props) => {
                     <span className="far fa-map fa-2x" />
                     &nbsp;&nbsp;&nbsp;{props.address}
                     <br/>
-                    <span className="fas fa-users fa-2x" />
-                    <Card.Link href="#">
-                        &nbsp;&nbsp;2,150 Members
-                    </Card.Link>
-                    <br/>
                     &nbsp;&nbsp;
                     <span className="far fa-user fa-2x" />
                     &nbsp;&nbsp;&nbsp;Organized by&nbsp;
@@ -142,9 +138,11 @@ const EventRightSideBar = (props) => {
                         href="/payment"
                         block
                     >
-                        Buy Ticket
+                        Make a contribution
                     </Button>
                     <br/>
+                    <RSVP event_id={props.event_id} address={props.address} start_date={props.start_date}
+                          end_date={props.end_date} name={props.name}/>
                 </Card.Text>
             </Card.Body>
             <MapContainer lat={props.address_latitude} lng={props.address_logitide}/>

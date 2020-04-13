@@ -49,7 +49,6 @@ router.put('/update', [
         .isEmpty()
 ], userController.updateProfile);
 
-
 router.post('/login', [
     check('email', 'Please enter email')
         .not()
@@ -66,8 +65,10 @@ router.post('/forgotpassword', [
         .isEmail()
 ], userController.forgotPassword);
 
-router.post('/resetpassword/:token', userController.resetPassword);
+router.get('/resetpassword/:token', userController.resetPassword);
 
 router.post('/updatepassword', auth, userController.updatePassword);
+
+router.get('/getuser/:token', auth, userController.getUser);
 
 module.exports = router;

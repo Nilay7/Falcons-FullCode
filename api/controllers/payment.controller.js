@@ -13,7 +13,6 @@ exports.pay = function(req, res){
     const name = req.body.name;
     const amount = req.body.amount;
     const userId = req.user;
-    const eventId = "5e728f21cb5eb79ed0d277b5";
 
     const create_payment_json = {
         "intent": "sale",
@@ -50,11 +49,10 @@ exports.pay = function(req, res){
             
             for(let i = 0;i < payment.links.length;i++){
               if(payment.links[i].rel === 'approval_url'){
-                console.log('paypal backend',payment.links[i].href);
                 return res.send({
                     'paypalLink':payment.links[i].href,
                     'userId': userId,
-                    'eventId': eventId,
+                    'eventId': "5e728f21cb5eb79ed0d277b5",
                     'amount': amount
                 });
               }
@@ -64,7 +62,6 @@ exports.pay = function(req, res){
 };
 
 exports.success = function(req, res){
-    console.log('req/query',req.query)
   const payerId = req.query.PayerID;
   const paymentId = req.query.paymentId;
   const userId = req.body.userId;
@@ -85,7 +82,6 @@ exports.success = function(req, res){
 
   paypal.payment.execute(paymentId, execute_payment_json, async function (error, payment) {
     if (error) {
-        console.log(error.response);
         throw error;
     } else {
         await payModel.create({
@@ -98,7 +94,7 @@ exports.success = function(req, res){
             if(err){
                 return res.status(400).send('Error Encountered while processing the payment!'+err);
             }
-            console.log(JSON.stringify(payment));
+            
             res.send({
                 'status': 'success',
                 'message': 'Transaction successfully completed!'

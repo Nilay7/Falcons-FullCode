@@ -12,15 +12,20 @@ const MyVerticallyCenteredModal = (props) => {
                centered="centered">
             <Modal.Header closeButton="closeButton">
                 <Modal.Title id="contained-modal-title-vcenter">
-                    RSVP for GDG
+                    RSVP for {props.name}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>GDG</h4>
+                <h4>{props.name}</h4>
                 <p>
-                    Monday, March 23, 2020 7:00 PM to 9:00 PM
+                    <strong>Location:</strong> {props.address}
                 </p>
-
+                <p>
+                    <strong>Start Date:</strong> {props.start_date}
+                </p>
+                <p>
+                    <strong>End Date:</strong> {props.end_date}
+                </p>
                 <p>No of Guests</p>
 
                 <DropdownButton id="dropdown-item-button" onSelect={props.guestsUpdated} title={props.guests}>
@@ -57,16 +62,42 @@ class RSVP extends React.Component {
         this.setState({guest: e});
     };
 
+    componentDidMount() {
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'x-auth-token': localStorage.getItem('token')
+        };
+
+        axios.get('http://localhost:3000/api/user/getuser/' + localStorage.getItem('token'), {
+            headers: headers
+        })
+            .then(res => {
+                this.setState({first_name: res.data.firstname});
+                this.setState({last_name: res.data.lastname});
+                this.setState({user_id: res.data._id});
+            });
+    }
+
     saveRsvp = () => {
+        const headers = {
+            'Content-Type': 'application/json',
+            'x-auth-token': localStorage.getItem('token')
+        };
+
         const rsvp = {
-            user_id: "5e3eeec1a839dc1b20bcd825",
-            event_id: "5e3c13f99206141034f95430",
+            user_id: this.state.user_id,
+            event_id: this.props.event_id,
             response: true,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
             no_of_guests: this.state.guest
         };
 
-        axios.post('http://localhost:3000/api/rsvp/confirm/', rsvp)
-            .then(res => console.log(res.data));
+        axios.post('http://localhost:3000/api/rsvp/confirm/', rsvp, {
+            headers: headers
+        })
+            .then(res => alert(res.data.message));
 
         this.setState({
             modalShow: false,
@@ -80,14 +111,20 @@ class RSVP extends React.Component {
             <div>
                 < div className="container">
                     <div className="vertical-center">
-                        <Button variant="primary" onClick={() => this.setState({modalShow: true})}>
+                        <Button block variant="primary" onClick={() => this.setState({modalShow: true})}>
                             RSVP
                         </Button>
                     </div>
 
                     <MyVerticallyCenteredModal show={this.state.modalShow}
                                                onHide={() => this.setState({modalShow: false})}
-                                               rsvpClicked={this.saveRsvp} guestsUpdated={this.guestsUpdated}
+                                               rsvpClicked={this.saveRsvp}
+                                               event_id={this.state.event_id}
+                                               start_date={this.props.start_date}
+                                               end_date={this.props.end_date}
+                                               address={this.props.address}
+                                               name={this.props.name}
+                                               guestsUpdated={this.guestsUpdated}
                                                guests={this.state.guest}/>
                 </div>
             </div>

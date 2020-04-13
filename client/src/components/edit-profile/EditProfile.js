@@ -7,15 +7,38 @@ class EditProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            _id: '5e72af401ba9485850ffa3aa',
-            username: 'HarshilPatel',
-            firstname: 'Harshil',
-            lastname: 'Patel',
-            email: 'patelharshil@gmail.com',
-            phonenumber: '1231231234',
-            password: 'harshil123',
-            confirm_password: 'harshil123'
+            _id: '',
+            username: '',
+            firstname: '',
+            lastname: '',
+            email: '',
+            phonenumber: '',
+            password: ''
         }
+    }
+
+    componentDidMount() {
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'x-auth-token': localStorage.getItem('token')
+        };
+
+        axios.get('http://localhost:3000/api/user/getuser/' + localStorage.getItem('token'), {
+            headers: headers
+        })
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    _id: res.data._id,
+                    username: res.data.username,
+                    firstname: res.data.firstname,
+                    lastname: res.data.lastname,
+                    email: res.data.email,
+                    phonenumber: res.data.phonenumber,
+                    password: res.data.password
+                })
+            });
     }
 
     updateProfileHandler = () => {
@@ -23,31 +46,20 @@ class EditProfile extends React.Component {
             _id: this.state._id,
             username: this.state.username,
             email: this.state.email,
-            password: this.state.password,
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             phonenumber: this.state.phonenumber,
+            password: this.state.password
         };
-
-        console.log(user);
 
         axios.put('http://localhost:3000/api/user/update/', user)
             .then(response => {
-                console.log(response);
+                if (response.status === 200)
+                    alert('Profile Updated');
+                else
+                    alert('Something went wrong');
             });
     };
-
-    // cancelHandler = () => {
-    //     this.setState({
-    //         _id: '',
-    //         username: '',
-    //         email: '',
-    //         password: '',
-    //         firstname: '',
-    //         lastname: '',
-    //         phonenumber: ''
-    //     });
-    // };
 
     render() {
         return (
@@ -83,7 +95,7 @@ class EditProfile extends React.Component {
                                 <div className="form-group">
                                     <label className="col-lg-3 control-label">Email:</label>
 
-                                    <input className="form-control" type="email" value={this.state.email}
+                                    <input disabled className="form-control" type="text" value={this.state.email}
                                            onChange={(event) => this.setState({email: event.target.value})}/>
 
                                 </div>
@@ -92,21 +104,6 @@ class EditProfile extends React.Component {
 
                                     <input className="form-control" type="text" value={this.state.phonenumber}
                                            onChange={(event) => this.setState({phonenumber: event.target.value})}/>
-
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-md-3 control-label">Password:</label>
-
-                                    <input className="form-control" type="password" value={this.state.password}
-                                           onChange={(event) => this.setState({password: event.target.value})}/>
-
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-md-3 control-label">Confirm password:</label>
-
-                                    <input className="form-control" type="password"
-                                           value={this.state.confirm_password}
-                                           onChange={(event) => this.setState({confirm_password: event.target.value})}/>
 
                                 </div>
                                 <div className="form-group">
