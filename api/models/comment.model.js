@@ -9,6 +9,9 @@ const CommentSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "users"
     },
+    user_name: {
+        type: String
+    },
     comment: {
         type: String
     }

@@ -53,3 +53,7 @@
 .FormBackground {
     background-color: white;
 }
+
+.pointer_cursor {
+    cursor: pointer;
+}
