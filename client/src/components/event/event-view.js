@@ -152,6 +152,15 @@ const EventRightSideBar = (props) => {
                     }}> <Button variant="primary">
                         Task Delegation
                     </Button>
+                    </Link>&nbsp;&nbsp;
+                    <Link to={{
+                        pathname: '/invite',
+                        query: {
+                            event_id: props.event_id
+                        }
+                    }}> <Button variant="primary">
+                        Event Invitation
+                    </Button>
                     </Link>
                 </Card.Text>
             </Card.Body>
