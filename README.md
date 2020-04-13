@@ -71,6 +71,19 @@ https://falcons-backend.herokuapp.com/api/user/login
 
 `/delegation`
 
+#### Viraj Sheth
+
+* Register
+`client/src/components/register/register.jsx`
+
+* ForgetPassword
+`client/src/components/login/forgetpassword.js`
+
+* About Us 
+`client/src/components/login/aboutus.js`
+
+*Contact US
+`client/src/components/contactus.js`
 
 ### Contribution
 
