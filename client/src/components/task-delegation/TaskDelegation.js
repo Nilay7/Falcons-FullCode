@@ -15,27 +15,47 @@ class TaskDelegation extends React.Component {
         this.state = {
             task:
                 {
-                    event_id: '5e728f4ded408769d875326e',
-                    user_id: '5e3eeec1a839dc1b20bcd825',
-                    first_name: 'Harshil',
-                    last_name: 'Patel',
-                    description: 'Hello World'
+                    event_id: '',
+                    user_id: '',
+                    first_name: '',
+                    last_name: '',
+                    description: 'Task Description'
                 },
             rsvps: [{}]
         };
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3000/api/rsvp/rsvpbyevent/5e728f4ded408769d875326e')
+        const headers = {
+            'Content-Type': 'application/json',
+            'x-auth-token': localStorage.getItem('token')
+        };
+
+        this.setState({task: {...this.state.task, event_id: this.props.location.query.event_id}});
+
+        axios.get('http://localhost:3000/api/user/getuser/' + localStorage.getItem('token'), {
+            headers: headers
+        })
+            .then(res => {
+                this.setState({task: {...this.state.task, first_name: res.data.firstname}});
+                this.setState({task: {...this.state.task, last_name: res.data.lastname}});
+                this.setState({task: {...this.state.task, user_id: res.data._id}});
+            });
+
+
+        axios.get('http://localhost:3000/api/rsvp/rsvpbyevent/' + this.props.location.query.event_id, {
+            headers: headers
+        })
             .then(res => this.setState({rsvps: res.data}));
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
-        // const isValid = this.validate();
-
-        // if (isValid) {
+        const headers = {
+            'Content-Type': 'application/json',
+            'x-auth-token': localStorage.getItem('token')
+        };
 
         const task = {
             user_id: this.state.task.user_id,
@@ -45,7 +65,9 @@ class TaskDelegation extends React.Component {
             task: this.state.task.description
         };
 
-        axios.post('http://localhost:3000/api/delegation/adddelegation', task)
+        axios.post('http://localhost:3000/api/delegation/adddelegation', task, {
+            headers: headers
+        })
             .then(res => alert(res.data));
 
         this.setState({
@@ -57,9 +79,6 @@ class TaskDelegation extends React.Component {
                 task: ''
             }
         });
-
-        // window.location = '/eve';
-        // }
     }
 
     onUserChangeListener(e) {

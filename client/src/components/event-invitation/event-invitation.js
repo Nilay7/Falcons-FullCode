@@ -11,7 +11,8 @@ import axios from 'axios';
 class Invitation extends React.Component {
 
     state = {
-        email: ''
+        email: '',
+        event_id: ''
     };
 
     constructor(props) {
@@ -24,11 +25,15 @@ class Invitation extends React.Component {
         })
     }
 
+    componentDidMount() {
+        this.setState({event_id: this.props.location.query.event_id})
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
 
         const invite = {
-            event_id: "5e728f21cb5eb79ed0d277b5",
+            event_id: this.state.event_id,
             "users": [
                 {
                     email: this.state.email
@@ -51,6 +56,8 @@ class Invitation extends React.Component {
                 <Header/>
                 <br/><br/><br/><br/><br/>
                 <div className="container">
+                    <h3>Don't forget to Invite your friends and family to this event!</h3>
+                    <br/><br/>
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group as={Row} controlId="formHorizontalEmail">
                             <Form.Label column="column" sm={{span: 2, offset: 2}}>

@@ -28,8 +28,8 @@ function sendMail(email, event) {
     const msg = {
         to: email,
         from: config.get('myEmail'),
-        subject: event,
-        html: "<strong>You are invited to event " + event + "</strong>",
+        subject: 'Event invitation',
+        html: "<strong>You are invited to an event " + event + "</strong>",
     };
 
     (async () => {
