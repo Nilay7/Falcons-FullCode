@@ -12,7 +12,15 @@ class Invitation extends React.Component {
 
     state = {
         email: '',
-        event_id: ''
+        event_id: '',
+        address: '',
+        start_date: '',
+        end_date: '',
+        event_name: '',
+        admin: '',
+        description: '',
+        first_name: '',
+        last_name: ''
     };
 
     constructor(props) {
@@ -26,7 +34,28 @@ class Invitation extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({event_id: this.props.location.query.event_id})
+        this.setState({
+            event_id: this.props.location.query.event_id,
+            start_date: this.props.location.query.start_date,
+            end_date: this.props.location.query.end_date,
+            event_name: this.props.location.query.event_name,
+            address: this.props.location.query.address,
+            admin: this.props.location.query.admin,
+            description: this.props.location.query.description
+        });
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'x-auth-token': localStorage.getItem('token')
+        };
+
+        axios.get('http://localhost:3000/api/user/getuser/' + localStorage.getItem('token'), {
+            headers: headers
+        })
+            .then(res => {
+                this.setState({first_name: res.data.firstname, last_name: res.data.lastname});
+            });
+
     }
 
     handleSubmit = (e) => {
@@ -34,6 +63,14 @@ class Invitation extends React.Component {
 
         const invite = {
             event_id: this.state.event_id,
+            address: this.state.address,
+            start_date: this.state.start_date,
+            end_date: this.state.end_date,
+            event_name: this.state.event_name,
+            admin: this.state.admin,
+            description: this.state.description,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
             "users": [
                 {
                     email: this.state.email

@@ -82,6 +82,7 @@ export default function Event(props) {
                                 start_date={start_date}
                                 end_date={end_date}
                                 event_id={event_id}
+                                description={description}
                             />
                         </Col>
                     </Row>
@@ -156,7 +157,13 @@ const EventRightSideBar = (props) => {
                     <Link to={{
                         pathname: '/invite',
                         query: {
-                            event_id: props.event_id
+                            event_id: props.event_id,
+                            address: props.address,
+                            start_date: props.start_date,
+                            end_date: props.end_date,
+                            event_name: props.name,
+                            admin: props.admin,
+                            description: props.description
                         }
                     }}> <Button variant="primary">
                         Event Invitation
