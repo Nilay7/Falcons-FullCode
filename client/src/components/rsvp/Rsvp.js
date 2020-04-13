@@ -109,24 +109,22 @@ class RSVP extends React.Component {
     render() {
         return (
             <div>
-                < div className="container">
-                    <div className="vertical-center">
-                        <Button block variant="primary" onClick={() => this.setState({modalShow: true})}>
-                            RSVP
-                        </Button>
-                    </div>
-
-                    <MyVerticallyCenteredModal show={this.state.modalShow}
-                                               onHide={() => this.setState({modalShow: false})}
-                                               rsvpClicked={this.saveRsvp}
-                                               event_id={this.state.event_id}
-                                               start_date={this.props.start_date}
-                                               end_date={this.props.end_date}
-                                               address={this.props.address}
-                                               name={this.props.name}
-                                               guestsUpdated={this.guestsUpdated}
-                                               guests={this.state.guest}/>
+                <div className="vertical-center">
+                    <Button block variant="primary" onClick={() => this.setState({modalShow: true})}>
+                        RSVP
+                    </Button>
                 </div>
+
+                <MyVerticallyCenteredModal show={this.state.modalShow}
+                                           onHide={() => this.setState({modalShow: false})}
+                                           rsvpClicked={this.saveRsvp}
+                                           event_id={this.state.event_id}
+                                           start_date={this.props.start_date}
+                                           end_date={this.props.end_date}
+                                           address={this.props.address}
+                                           name={this.props.name}
+                                           guestsUpdated={this.guestsUpdated}
+                                           guests={this.state.guest}/>
             </div>
         )
     };

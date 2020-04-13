@@ -6,6 +6,7 @@ import MapContainer from "./MapContainer";
 import {Card, Col, Container, Row, Form, Button} from "react-bootstrap";
 import Comments from "./Comments";
 import RSVP from "../rsvp/Rsvp";
+import {Link} from "react-router-dom";
 
 export default function Event(props) {
     const [admin, setAdmin] = useState("");
@@ -142,7 +143,16 @@ const EventRightSideBar = (props) => {
                     </Button>
                     <br/>
                     <RSVP event_id={props.event_id} address={props.address} start_date={props.start_date}
-                          end_date={props.end_date} name={props.name}/>
+                          end_date={props.end_date} name={props.name}/><br/>
+                    <Link to={{
+                        pathname: '/delegation',
+                        query: {
+                            event_id: props.event_id
+                        }
+                    }}> <Button variant="primary">
+                        Task Delegation
+                    </Button>
+                    </Link>
                 </Card.Text>
             </Card.Body>
             <MapContainer lat={props.address_latitude} lng={props.address_logitide}/>
