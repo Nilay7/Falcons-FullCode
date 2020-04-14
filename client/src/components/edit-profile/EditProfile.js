@@ -24,7 +24,7 @@ class EditProfile extends React.Component {
             'x-auth-token': localStorage.getItem('token')
         };
 
-        axios.get('http://localhost:3000/api/user/getuser/' + localStorage.getItem('token'), {
+        axios.get('/api/user/getuser/' + localStorage.getItem('token'), {
             headers: headers
         })
             .then(res => {
@@ -52,7 +52,7 @@ class EditProfile extends React.Component {
             password: this.state.password
         };
 
-        axios.put('http://localhost:3000/api/user/update/', user)
+        axios.put('/api/user/update/', user)
             .then(response => {
                 if (response.status === 200)
                     alert('Profile Updated');

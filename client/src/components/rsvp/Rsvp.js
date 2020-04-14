@@ -69,7 +69,7 @@ class RSVP extends React.Component {
             'x-auth-token': localStorage.getItem('token')
         };
 
-        axios.get('http://localhost:3000/api/user/getuser/' + localStorage.getItem('token'), {
+        axios.get('/api/user/getuser/' + localStorage.getItem('token'), {
             headers: headers
         })
             .then(res => {
@@ -94,7 +94,7 @@ class RSVP extends React.Component {
             no_of_guests: this.state.guest
         };
 
-        axios.post('http://localhost:3000/api/rsvp/confirm/', rsvp, {
+        axios.post('/api/rsvp/confirm/', rsvp, {
             headers: headers
         })
             .then(res => alert(res.data.message));

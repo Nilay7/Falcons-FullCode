@@ -49,7 +49,7 @@ class Invitation extends React.Component {
             'x-auth-token': localStorage.getItem('token')
         };
 
-        axios.get('http://localhost:3000/api/user/getuser/' + localStorage.getItem('token'), {
+        axios.get('/api/user/getuser/' + localStorage.getItem('token'), {
             headers: headers
         })
             .then(res => {
@@ -78,7 +78,7 @@ class Invitation extends React.Component {
             ]
         };
 
-        axios.post('http://localhost:3000/api/invitation/invite/', invite)
+        axios.post('/api/invitation/invite/', invite)
             .then(res => alert(res.data));
 
         this.setState({
