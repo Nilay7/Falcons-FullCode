@@ -82,6 +82,7 @@ exports.success = function(req, res){
 
   paypal.payment.execute(paymentId, execute_payment_json, async function (error, payment) {
     if (error) {
+        console.log('paypal execute error',error)
         throw error;
     } else {
         await payModel.create({
