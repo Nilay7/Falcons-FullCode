@@ -15,7 +15,7 @@ const geocoder = NodeGeocoder(options);
 
 exports.fetchEvent = async (request, response) => {
     try {
-        const eventFromDb = await Event.findById(request.params.event_id ).populate('user_id');
+        const eventFromDb = await Event.findById(request.params.event_id ).populate('user_id').populate('comments');
         if (eventFromDb == null){
             response.status(404).send('Event not found');
         }

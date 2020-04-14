@@ -20,6 +20,12 @@ const EventSchema = new mongoose.Schema({
             ref: "rsvps"
         }
     ],
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "comments"
+        }
+    ],
     event_picture: {
         type: String
     },

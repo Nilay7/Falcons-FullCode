@@ -87,12 +87,12 @@ https://falcons-backend.herokuapp.com/api/user/login
 
 ### Contribution
 
-| Feature       | Frontend (React) | Backend (Node) |
-| :------------- | -------------:| -----:|
+| Feature       | Frontend (React) | Backend (Node) | URL |
+| :------------- | -------------:| -----:| -----:|
 | **Rakshit** |
-| Event      | src/components/event/event.css src/components/event/event-create.js src/components/event/event-view.js src/components/event/MapContainer.js | api/controllers/event.controller.js api/models/event.model.js api/routes/event.route.js |
-| Google Maps API      | src/components/event/MapContainer.js | api/controllers/event.controller.js |
-| Comments | src/components/event/event-view.js | api/controllers/comment.controller.js api/controller/event.controller.js |
+| Event      | src/components/event/event.css src/components/event/event-create.js src/components/event/event-view.js src/components/event/MapContainer.js | api/controllers/event.controller.js api/models/event.model.js api/routes/event.route.js | /event-create |
+| Google Maps API      | src/components/event/MapContainer.js | api/controllers/event.controller.js | /event/:event_id |
+| Comments | src/components/event/Comments.js | api/controllers/comment.controller.js api/controller/event.controller.js | /event/:event_id |
 
 ### Steps to run the project
 

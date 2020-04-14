@@ -23,4 +23,17 @@ router.post('/adddelegation', [
 
 router.delete('/deletedelegation/:id', auth, controller.deletedelegation);
 
+router.post('/notifyuser', [
+    check('event_id')
+        .exists()
+        .withMessage('Event id is required'),
+    check('user_id')
+        .exists()
+        .withMessage('User id is required'),
+    check('task')
+        .exists()
+        .withMessage('Task is required')
+], auth, controller.notifyUser);
+
+
 module.exports = router;

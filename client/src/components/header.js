@@ -10,11 +10,9 @@ export default function Header(props) {
             <Navbar.Brand href="#home">Event</Navbar.Brand>
             <Nav className="mr-auto">
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/invite">Event Invitation</Nav.Link>
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/register">Register</Nav.Link>
-                <Nav.Link href="/event">Event</Nav.Link>
-                <Nav.Link href="/delegation">Task Delegation</Nav.Link>
+                <Nav.Link href="/event-create">New Event</Nav.Link>
                 <Nav.Link href="/edit-profile">Edit Profile</Nav.Link>
                 <Nav.Link href="/updatepassword">Update Password</Nav.Link>
                 <Nav.Link href="/payment">Contribute</Nav.Link>
