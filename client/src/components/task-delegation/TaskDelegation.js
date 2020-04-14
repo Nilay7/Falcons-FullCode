@@ -4,6 +4,7 @@ import Header from "../header";
 import Footer from "../footer";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
 class TaskDelegation extends React.Component {
 
@@ -37,9 +38,14 @@ class TaskDelegation extends React.Component {
             headers: headers
         })
             .then(res => {
-                this.setState({task: {...this.state.task, first_name: res.data.firstname}});
-                this.setState({task: {...this.state.task, last_name: res.data.lastname}});
-                this.setState({task: {...this.state.task, user_id: res.data._id}});
+                this.setState({
+                    task: {
+                        ...this.state.task,
+                        first_name: res.data.firstname, ...this.state.task,
+                        last_name: res.data.lastname, ...this.state.task,
+                        user_id: res.data._id
+                    }
+                });
             });
 
 
@@ -47,6 +53,9 @@ class TaskDelegation extends React.Component {
             headers: headers
         })
             .then(res => this.setState({rsvps: res.data}));
+
+        axios.get('http://localhost:3000/api/delegation/listdelegation/' + this.props.location.query.event_id)
+            .then(res => this.setState({delegations: res.data}));
     }
 
     handleSubmit(e) {
@@ -57,10 +66,12 @@ class TaskDelegation extends React.Component {
             'x-auth-token': localStorage.getItem('token')
         };
 
+        const user = this.state.rsvps.find((rsvp) => rsvp.user_id === this.state.task.user_id);
+
         const task = {
             user_id: this.state.task.user_id,
-            first_name: this.state.task.first_name,
-            last_name: this.state.task.last_name,
+            first_name: user.first_name,
+            last_name: user.last_name,
             event_id: this.state.task.event_id,
             task: this.state.task.description
         };
@@ -70,15 +81,10 @@ class TaskDelegation extends React.Component {
         })
             .then(res => alert(res.data));
 
-        this.setState({
-            task: {
-                user_id: '',
-                first_name: '',
-                last_name: '',
-                event_id: '',
-                task: ''
-            }
-        });
+        axios.post('http://localhost:3000/api/delegation/notifyuser', task, {
+            headers: headers
+        })
+            .then(res => console.log(res.data));
     }
 
     onUserChangeListener(e) {
@@ -86,18 +92,27 @@ class TaskDelegation extends React.Component {
     };
 
     render() {
+
+        let del = this.state.delegations ? this.state.delegations.map((del, index) => (
+            <tr>
+                <td>{del.first_name}, {del.last_name}</td>
+                <td>{del.task}</td>
+            </tr>
+        )) : null;
+
         return (
             <>
                 <Header/>
                 <br/>
                 <div className="container">
+                    <h1>Delegate New Task</h1>
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="exampleForm.ControlSelect2">
                             <Form.Label>User</Form.Label>
                             <Form.Control as="select" onChange={this.onUserChangeListener.bind(this)}>
                                 {this.state.rsvps.map((rsvp, index) => (
                                     <option
-                                        value={rsvp.user_id}>{rsvp.user_id} - {rsvp.first_name}, {rsvp.last_name}</option>
+                                        value={rsvp.user_id}>{rsvp.first_name}, {rsvp.last_name}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>
@@ -113,6 +128,20 @@ class TaskDelegation extends React.Component {
                         </Form.Group>
                         <Button type="submit">Delegate</Button>
                     </Form>
+                    <br/><br/>
+                    <h1>Delegated Tasks</h1>
+                    <Table bordered hover>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Task</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {del}
+                        </tbody>
+                    </Table>
+                    <br/><br/>
                 </div>
                 <Footer/>
             </>
