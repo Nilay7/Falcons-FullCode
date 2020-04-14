@@ -10,7 +10,7 @@
     "client-install": "cd client && npm install",
     "preinstall": "npm i concurrently",
     "postinstall": "npm run client-install",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "directories": {
     "lib": "lib"
