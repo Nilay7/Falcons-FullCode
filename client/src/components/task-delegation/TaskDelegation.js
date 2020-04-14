@@ -34,7 +34,7 @@ class TaskDelegation extends React.Component {
 
         this.setState({task: {...this.state.task, event_id: this.props.location.query.event_id}});
 
-        axios.get('http://localhost:3000/api/user/getuser/' + localStorage.getItem('token'), {
+        axios.get('/api/user/getuser/' + localStorage.getItem('token'), {
             headers: headers
         })
             .then(res => {
@@ -49,12 +49,12 @@ class TaskDelegation extends React.Component {
             });
 
 
-        axios.get('http://localhost:3000/api/rsvp/rsvpbyevent/' + this.props.location.query.event_id, {
+        axios.get('/api/rsvp/rsvpbyevent/' + this.props.location.query.event_id, {
             headers: headers
         })
             .then(res => this.setState({rsvps: res.data}));
 
-        axios.get('http://localhost:3000/api/delegation/listdelegation/' + this.props.location.query.event_id)
+        axios.get('/api/delegation/listdelegation/' + this.props.location.query.event_id)
             .then(res => this.setState({delegations: res.data}));
     }
 
@@ -76,12 +76,12 @@ class TaskDelegation extends React.Component {
             task: this.state.task.description
         };
 
-        axios.post('http://localhost:3000/api/delegation/adddelegation', task, {
+        axios.post('/api/delegation/adddelegation', task, {
             headers: headers
         })
             .then(res => alert(res.data));
 
-        axios.post('http://localhost:3000/api/delegation/notifyuser', task, {
+        axios.post('/api/delegation/notifyuser', task, {
             headers: headers
         })
             .then(res => console.log(res.data));
