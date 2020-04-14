@@ -7,7 +7,7 @@ const connectDB = require('./config/connectDB');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 const paypal = require('paypal-rest-sdk');
 
@@ -19,6 +19,8 @@ paypal.configure({
 
 // connect to db
 connectDB();
+
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use(cors());
 app.use(express.json());
