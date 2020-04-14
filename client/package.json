@@ -26,6 +26,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://falcons-event-management.herokuapp.com/",
   "eslintConfig": {
     "extends": "react-app"
   },
