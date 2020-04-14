@@ -3,7 +3,7 @@ const app = express();
 const config = require('config');
 var cors = require('cors');
 const connectDB = require('./config/connectDB');
-
+const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
 
