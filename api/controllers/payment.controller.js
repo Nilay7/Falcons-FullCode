@@ -20,8 +20,8 @@ exports.pay = function(req, res){
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:4000/paymentsuccess",
-            "cancel_url": "http://localhost:4000/paymentfailure"
+            "return_url": "https://falcons-event-management.herokuapp.com/paymentsuccess",
+            "cancel_url": "https://falcons-event-management.herokuapp.com/paymentfailure"
         },
         "transactions": [{
             "item_list": {
