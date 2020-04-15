@@ -1,7 +1,8 @@
 const {check, validationResult} = require('express-validator');
 const config = require('config');
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(config.get('SENDGRID_API_KEY'));
+// sgMail.setApiKey(config.get('SENDGRID_API_KEY'));
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.invite = function (req, res) {
     try {
@@ -35,7 +36,8 @@ exports.invite = function (req, res) {
 function sendMail(email, event_id, event_name, address, start_date, end_date, admin, description, first_name, last_name) {
     const msg = {
         to: email,
-        from: config.get('myEmail'),
+        from: process.env.myEmail,
+        // from: config.get('myEmail'),
         subject: 'Event invitation',
         html: `<!DOCTYPE html><html><head> <title>Email Page</title> <style type='text/css'></style></head><body><div align=justify> <p>Hi ${first_name}${last_name},</p><p>You have been invited to <b>${event_name}</b> event. <p>Please note, this email is not a confirmation, you have to rsvp on https://falcons-event-management.herokuapp.com/event/${event_id}.</p><p>EVENT DETAILS:</p><ul> Organized By: <li>${admin}</li><br>Address: <li>${address}</li><br>Start Date: <li>${start_date}</li><br>End Date: <li>${end_date}</li><br>Details: <li>${description}</li><br></ul> <br><p>Please let us know if there are any changes.<br><br>Regards,<br><b style=color: #173F5F;>The Optimizers Team</b><br>Humber Institute of Technology & Advanced Learning<br>205 Humber College Blvd<br>Etobicoke, ON M9W 5L7<br>Phone: 416-675-5000<br>Email:<a href=mailto:enquiry@humber.ca>enquiry@humber.ca</a><br><a href=https://www.humber.ca>www.humber.ca</a></p></div></body></html>`,
     };
