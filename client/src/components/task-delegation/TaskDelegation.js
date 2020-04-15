@@ -85,6 +85,9 @@ class TaskDelegation extends React.Component {
             headers: headers
         })
             .then(res => console.log(res.data));
+
+        axios.get('/api/delegation/listdelegation/' + this.props.location.query.event_id)
+            .then(res => this.setState({delegations: res.data}));
     }
 
     onUserChangeListener(e) {
