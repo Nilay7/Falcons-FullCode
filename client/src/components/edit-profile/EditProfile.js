@@ -13,16 +13,9 @@ class EditProfile extends React.Component {
             lastname: '',
             email: '',
             phonenumber: '',
-            password: ''
-        }
-    }
-
-    componentDidMount() {
-
-        // const headers = {
-        //     'Content-Type': 'application/json',
-        //     'x-auth-token': localStorage.getItem('token')
-        // };
+            password: '',
+            flag: false
+        };
 
         fetch("/api/user/getuser/" + localStorage.getItem('token'), {
             method: 'GET',
@@ -33,6 +26,7 @@ class EditProfile extends React.Component {
             .then(res => {
                 if (res.status === 200) {
                     res.json().then(resp => {
+                        console.log(resp);
                         this.setState({
                             _id: resp.data._id,
                             username: resp.data.username,
@@ -53,6 +47,18 @@ class EditProfile extends React.Component {
                 console.error(err);
                 alert('Error in getting user in please try again');
             });
+    }
+
+    componentDidMount() {
+
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'x-auth-token': localStorage.getItem('token')
+        // };
+
+        setTimeout(() => {
+            this.setState({flag: true});
+        }, 1000);
 
         // axios.get('/api/user/getuser/' + localStorage.getItem('token'), {
         //     headers: headers
@@ -95,57 +101,58 @@ class EditProfile extends React.Component {
             <>
                 <Header/>
                 <br/>
-                <div className="container justify-content-center">
-                    <div className="row justify-content-center">
-                        <div className="col-lg-6 col-lg-offset-4">
-                            <h3>Edit Profile</h3>
-                            <form className="form-horizontal">
-                                <div className="form-group">
-                                    <label className="col-md-3 control-label">Username:</label>
+                {this.state.flag ?
+                    <div className="container justify-content-center">
+                        <div className="row justify-content-center">
+                            <div className="col-lg-6 col-lg-offset-4">
+                                <h3>Edit Profile</h3>
+                                <form className="form-horizontal">
+                                    <div className="form-group">
+                                        <label className="col-md-3 control-label">Username:</label>
 
-                                    <input className="form-control" type="text" value={this.state.username}
-                                           onChange={(event) => this.setState({username: event.target.value})}/>
+                                        <input className="form-control" type="text" value={this.state.username}
+                                               onChange={(event) => this.setState({username: event.target.value})}/>
 
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-lg-3 control-label">First name:</label>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="col-lg-3 control-label">First name:</label>
 
-                                    <input className="form-control" type="text" value={this.state.firstname}
-                                           onChange={(event) => this.setState({firstname: event.target.value})}/>
+                                        <input className="form-control" type="text" value={this.state.firstname}
+                                               onChange={(event) => this.setState({firstname: event.target.value})}/>
 
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-lg-3 control-label">Last name:</label>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="col-lg-3 control-label">Last name:</label>
 
-                                    <input className="form-control" type="text" value={this.state.lastname}
-                                           onChange={(event) => this.setState({lastname: event.target.value})}/>
+                                        <input className="form-control" type="text" value={this.state.lastname}
+                                               onChange={(event) => this.setState({lastname: event.target.value})}/>
 
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-lg-3 control-label">Email:</label>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="col-lg-3 control-label">Email:</label>
 
-                                    <input disabled className="form-control" type="text" value={this.state.email}
-                                           onChange={(event) => this.setState({email: event.target.value})}/>
+                                        <input disabled className="form-control" type="text" value={this.state.email}
+                                               onChange={(event) => this.setState({email: event.target.value})}/>
 
-                                </div>
-                                <div className="form-group">
-                                    <label className="col-lg-3 control-label">Phone:</label>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="col-lg-3 control-label">Phone:</label>
 
-                                    <input className="form-control" type="text" value={this.state.phonenumber}
-                                           onChange={(event) => this.setState({phonenumber: event.target.value})}/>
+                                        <input className="form-control" type="text" value={this.state.phonenumber}
+                                               onChange={(event) => this.setState({phonenumber: event.target.value})}/>
 
-                                </div>
-                                <div className="form-group">
+                                    </div>
+                                    <div className="form-group">
 
-                                    <input type="button" className="btn btn-primary" value="Update"
-                                           onClick={this.updateProfileHandler}/>
-                                    <input type="reset" className="btn btn-default" value="Cancel"/>
+                                        <input type="button" className="btn btn-primary" value="Update"
+                                               onClick={this.updateProfileHandler}/>
+                                        <input type="reset" className="btn btn-default" value="Cancel"/>
 
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </div> : null}
                 <br/><br/><br/>
                 <Footer/>
             </>
