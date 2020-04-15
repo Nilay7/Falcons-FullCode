@@ -128,7 +128,7 @@ exports.forgotPassword = async function (req, res) {
     if (checkemail) {
 
         const token = jwt.sign({_id: checkemail._id}, jwtsecret)
-        var link = 'localhost:4000/resetpassword/' + token;
+        var link = 'https://falcons-event-management.herokuapp.com/resetpassword/' + token;
         const msg = {
             to: checkemail.email,
             from: config.get('myEmail'),
