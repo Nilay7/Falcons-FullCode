@@ -14,16 +14,16 @@ Event Management System is the application that is aimed at managing many task w
 
 ### Application link and login credentials
 
-### Link of Backend: 
+### Link of Application: 
 
 For Login
 
-https://falcons-backend.herokuapp.com/api/user/login
+https://falcons-event-management.herokuapp.com/
 
 #### Login Credentials
 
 `Email: patelnilay33@gmail.com`
-`Password: 123456`
+`Password: 1234567`
 
 ##### Feel Free to register yourself!
 
