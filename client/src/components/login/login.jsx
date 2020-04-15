@@ -42,7 +42,7 @@ export default class Login extends Component {
       method: 'POST',
       body: JSON.stringify(this.state),
       headers: {
-        'Content-Type': 'application/json'
+        'content-Type': 'application/json'
       }
     })
     .then(res => {
