@@ -22,20 +22,20 @@ connectDB();
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
-
 app.use(cors());
 app.use(express.json());
 
 require('./api/routes')(app);
 
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 app.listen(port, (err) => {
-    if(err) {
-        console.log('ERROR while starting server: ',err);
+    if (err) {
+        console.log('ERROR while starting server: ', err);
     }
-    console.log('Server is running on port '+port);
-} )
+    console.log('Server is running on port ' + port);
+});
 
 module.exports = app;
