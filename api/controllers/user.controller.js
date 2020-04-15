@@ -114,6 +114,8 @@ exports.login = async function (req, res) {
 
 exports.forgotPassword = async function (req, res) {
 
+    console.log('api-key', process.env.SENDGRID_API_KEY);
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(422).json({errors: errors.array()});
