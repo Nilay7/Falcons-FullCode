@@ -4,9 +4,13 @@ const User = require('../models/user.model');
 const {validationResult} = require('express-validator');
 const config = require('config');
 const jwtsecret = config.get('jwtsecret');
+const dotenv = require('dotenv');
+dotenv.config();
+
+console.log('api-key', process.env.SENDGRID_API_KEY);
 
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(config.get('SENDGRID_API_KEY'));
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.register = async function (req, res) {
 
