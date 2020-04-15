@@ -37,7 +37,7 @@ export default class Register extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:4000/api/user/register", {
+    fetch('/api/user/register', {
       method: 'POST',
       body: JSON.stringify(this.state),
       headers: {

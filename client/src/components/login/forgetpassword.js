@@ -31,7 +31,7 @@ class Forgetpassword extends React.Component {
       loading: true,
     });
 
-    axios.post("http://localhost:4000/api/user/forgotpassword", {
+    axios.post('/api/user/forgotpassword', {
       email: email,
     }).then(() => {
       toast.success("Check your email address for the recovery link")
