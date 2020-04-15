@@ -26,7 +26,6 @@ class EditProfile extends React.Component {
 
         fetch("/api/user/getuser/" + localStorage.getItem('token'), {
             method: 'GET',
-            body: JSON.stringify(this.state),
             headers: {
                 'Content-Type': 'application/json'
             }

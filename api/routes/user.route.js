@@ -69,6 +69,6 @@ router.get('/resetpassword/:token', userController.resetPassword);
 
 router.post('/updatepassword', auth, userController.updatePassword);
 
-router.get('/getuser/:token', auth, userController.getUser);
+router.get('/getuser/:token', userController.getUser);
 
 module.exports = router;
