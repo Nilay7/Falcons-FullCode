@@ -4,6 +4,7 @@ var User = require('../models/user.model');
 var Event = require('../models/event.model');
 const config = require('config');
 const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.getDelegations = function (req, res) {
     Delegation.find({event_id: req.params.id})
@@ -75,7 +76,6 @@ exports.notifyUser = async function (req, res) {
 };
 
 function sendMail(email, first_name, last_name, task, event_name, admin, address, start_date, end_date, description) {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
         to: email,
         from: process.env.myEmail,
