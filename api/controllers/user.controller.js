@@ -138,6 +138,7 @@ exports.forgotPassword = async function (req, res) {
 
         (async () => {
             try {
+                console.log('msg',msg)
                 await sgMail.send(msg);
                 return res.send('Mail sent successfully!')
             } catch (err) {
