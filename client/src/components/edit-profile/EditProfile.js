@@ -19,26 +19,55 @@ class EditProfile extends React.Component {
 
     componentDidMount() {
 
-        const headers = {
-            'Content-Type': 'application/json',
-            'x-auth-token': localStorage.getItem('token')
-        };
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'x-auth-token': localStorage.getItem('token')
+        // };
 
-        axios.get('/api/user/getuser/' + localStorage.getItem('token'), {
-            headers: headers
+        fetch("/api/user/getuser/" + localStorage.getItem('token'), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
             .then(res => {
-                console.log(res.data);
-                this.setState({
-                    _id: res.data._id,
-                    username: res.data.username,
-                    firstname: res.data.firstname,
-                    lastname: res.data.lastname,
-                    email: res.data.email,
-                    phonenumber: res.data.phonenumber,
-                    password: res.data.password
-                })
+                if (res.status === 200) {
+                    res.json().then(resp => {
+                        this.setState({
+                            _id: resp.data._id,
+                            username: resp.data.username,
+                            firstname: resp.data.firstname,
+                            lastname: resp.data.lastname,
+                            email: resp.data.email,
+                            phonenumber: resp.data.phonenumber,
+                            password: resp.data.password
+                        })
+                    })
+                } else {
+                    res.json().then(resp => {
+                        alert(JSON.stringify(resp.msg));
+                    })
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Error in getting user in please try again');
             });
+
+        // axios.get('/api/user/getuser/' + localStorage.getItem('token'), {
+        //     headers: headers
+        // })
+        //     .then(res => {
+        //         this.setState({
+        //             _id: res.data._id,
+        //             username: res.data.username,
+        //             firstname: res.data.firstname,
+        //             lastname: res.data.lastname,
+        //             email: res.data.email,
+        //             phonenumber: res.data.phonenumber,
+        //             password: res.data.password
+        //         })
+        //     });
     }
 
     updateProfileHandler = () => {
