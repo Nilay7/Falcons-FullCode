@@ -23,31 +23,31 @@ import UpdatePassword from './components/updatepassword/updatepassword';
 import TaskDelegation from "./components/task-delegation/TaskDelegation";
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path='/' component={Login} />
-          <Route path='/register' component={Register} />
-          <Route path='/rsvp' component={RSVP} />
-          <Route path='/invite' component={EventInvitation} />
-          <Route path='/payment' component={Payment} />
-          <Route path='/paypalprocess' component={PayPalProcess} />
-          <Route path='/paymentsuccess' component={PaymentFinish} />
-          <Route path='/edit-profile' component={EditProfile} />
-          <Route path='/forgetpassword' component={Forgetpassword} />
-          <Route path='/resetpassword' component={Resetpassword} />
-          <Route path='/eventlist' component={EventList} />
-          <Route path='/contactus' component={ContactUs} />
-          <Route path='/aboutus' component={Aboutus} />
-          <Route path='/updatepassword' component={UpdatePassword} />
-          <Route path='/delegation' component={TaskDelegation} />
-          <Route path='/event/:event_id' component={Event} />
-          <Route path='/event-create' component={NewEvent} />
-        </Switch>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <Switch>
+                    <Route path='/edit-profile' component={EditProfile}/>
+                    <Route exact path='/' component={Login}/>
+                    <Route path='/register' component={Register}/>
+                    <Route path='/rsvp' component={RSVP}/>
+                    <Route path='/invite' component={EventInvitation}/>
+                    <Route path='/payment' component={Payment}/>
+                    <Route path='/paypalprocess' component={PayPalProcess}/>
+                    <Route path='/paymentsuccess' component={PaymentFinish}/>
+                    <Route path='/forgetpassword' component={Forgetpassword}/>
+                    <Route path='/resetpassword' component={Resetpassword}/>
+                    <Route path='/eventlist' component={EventList}/>
+                    <Route path='/contactus' component={ContactUs}/>
+                    <Route path='/aboutus' component={Aboutus}/>
+                    <Route path='/updatepassword' component={UpdatePassword}/>
+                    <Route path='/delegation' component={TaskDelegation}/>
+                    <Route path='/event/:event_id' component={Event}/>
+                    <Route path='/event-create' component={NewEvent}/>
+                </Switch>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
