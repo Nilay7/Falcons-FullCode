@@ -4,7 +4,6 @@ var User = require('../models/user.model');
 var Event = require('../models/event.model');
 const config = require('config');
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(config.get('SENDGRID_API_KEY'));
 
 exports.getDelegations = function (req, res) {
     Delegation.find({event_id: req.params.id})
@@ -76,9 +75,10 @@ exports.notifyUser = async function (req, res) {
 };
 
 function sendMail(email, first_name, last_name, task, event_name, admin, address, start_date, end_date, description) {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
         to: email,
-        from: config.get('myEmail'),
+        from: process.env.myEmail,
         subject: 'Task Delegated',
         html: `<!DOCTYPE html><html><head> <title>Email Page</title> <style type='text/css'></style></head><body><div align=justify> <p>Hi ${first_name}${last_name},</p><p>A task has been delegated to you for <b>${event_name}</b> event.</p><br><p>DESCRIPTION OF TASK:</p><ul> <li>${task}</li></ul> <br><p>EVENT DETAILS:</p><ul> Address: <li>${address}</li><br>Start Date: <li>${start_date}</li><br>End Date: <li>${end_date}</li><br>Details: <li>${description}</li></ul> <p><br>Regards,<br><b style=color: #173F5F;>The Optimizers Team</b><br>Humber Institute of Technology & Advanced Learning<br>205 Humber College Blvd<br>Etobicoke, ON M9W 5L7<br>Phone: 416-675-5000<br>Email:<a href=mailto:enquiry@humber.ca>enquiry@humber.ca</a><br><a href=https://www.humber.ca>www.humber.ca</a> </p></div></body></html>`,
     };
