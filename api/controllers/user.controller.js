@@ -195,12 +195,7 @@ exports.getUser = async function (req, res) {
 
     const userId = decoded._id;
 
-    console.log(userId);
-    console.log(token);
-
     const userdata = await User.findOne({_id: userId});
-
-    console.log(userdata);
 
     if (userdata) {
         return res.json(userdata);
