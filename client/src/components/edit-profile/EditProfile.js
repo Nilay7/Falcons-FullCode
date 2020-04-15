@@ -17,63 +17,62 @@ class EditProfile extends React.Component {
             flag: false
         };
 
-        fetch("/api/user/getuser/" + localStorage.getItem('token'), {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        // fetch("/api/user/getuser/" + localStorage.getItem('token'), {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+        //     .then(res => {
+        //         if (res.status === 200) {
+        //             res.json().then(resp => {
+        //                 console.log(resp);
+        //                 this.setState({
+        //                     _id: resp.data._id,
+        //                     username: resp.data.username,
+        //                     firstname: resp.data.firstname,
+        //                     lastname: resp.data.lastname,
+        //                     email: resp.data.email,
+        //                     phonenumber: resp.data.phonenumber,
+        //                     password: resp.data.password
+        //                 })
+        //             })
+        //         } else {
+        //             res.json().then(resp => {
+        //                 alert(JSON.stringify(resp.msg));
+        //             })
+        //         }
+        //     })
+        //     .catch(err => {
+        //         console.error(err);
+        //         alert('Error in getting user in please try again');
+        //     });
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'x-auth-token': localStorage.getItem('token')
+        };
+
+        axios.get('/api/user/getuser/' + localStorage.getItem('token'), {
+            headers: headers
         })
             .then(res => {
-                if (res.status === 200) {
-                    res.json().then(resp => {
-                        console.log(resp);
-                        this.setState({
-                            _id: resp.data._id,
-                            username: resp.data.username,
-                            firstname: resp.data.firstname,
-                            lastname: resp.data.lastname,
-                            email: resp.data.email,
-                            phonenumber: resp.data.phonenumber,
-                            password: resp.data.password
-                        })
-                    })
-                } else {
-                    res.json().then(resp => {
-                        alert(JSON.stringify(resp.msg));
-                    })
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                alert('Error in getting user in please try again');
+                this.setState({
+                    _id: res.data._id,
+                    username: res.data.username,
+                    firstname: res.data.firstname,
+                    lastname: res.data.lastname,
+                    email: res.data.email,
+                    phonenumber: res.data.phonenumber,
+                    password: res.data.password
+                })
             });
     }
 
     componentDidMount() {
-
-        // const headers = {
-        //     'Content-Type': 'application/json',
-        //     'x-auth-token': localStorage.getItem('token')
-        // };
-
         setTimeout(() => {
             this.setState({flag: true});
         }, 1000);
-
-        // axios.get('/api/user/getuser/' + localStorage.getItem('token'), {
-        //     headers: headers
-        // })
-        //     .then(res => {
-        //         this.setState({
-        //             _id: res.data._id,
-        //             username: res.data.username,
-        //             firstname: res.data.firstname,
-        //             lastname: res.data.lastname,
-        //             email: res.data.email,
-        //             phonenumber: res.data.phonenumber,
-        //             password: res.data.password
-        //         })
-        //     });
     }
 
     updateProfileHandler = () => {
@@ -86,6 +85,9 @@ class EditProfile extends React.Component {
             phonenumber: this.state.phonenumber,
             password: this.state.password
         };
+
+        console.log(user);
+        console.log(this.state);
 
         axios.put('/api/user/update/', user)
             .then(response => {
